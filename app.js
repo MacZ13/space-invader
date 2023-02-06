@@ -28,3 +28,34 @@ tableauId.forEach(element => {
     tableauGrille[element].classList.add("alien");
 });
 
+document.onkeydown = function(event) { // événement de touche enfoncée
+    let tireur = document.querySelector(".tireur"); // récupère l'élément de la classe "tireur"
+    let indexTireur = Array.from(tableauGrille).indexOf(tireur); // récupère l'index actuel du tireur dans "tableauGrille"
+    
+    switch (event.keyCode) { // vérifie le code de la touche enfoncée
+    case 37: // flèche gauche
+    if (indexTireur % 20 !== 0) { // vérifie que le tireur ne se trouve pas sur la bordure gauche
+    tireur.classList.remove("tireur"); // enlève la classe "tireur" de l'élément actuel
+    tableauGrille[indexTireur - 1].classList.add("tireur"); // ajoute la classe "tireur" à l'élément précédent
+    }
+    break;
+    case 38: // flèche haut
+    if (indexTireur >= 20) { // vérifie que le tireur ne se trouve pas sur la bordure supérieure
+    tireur.classList.remove("tireur"); // enlève la classe "tireur" de l'élément actuel
+    tableauGrille[indexTireur - 20].classList.add("tireur"); // ajoute la classe "tireur" à l'élément 20 cases au-dessus
+    }
+    break;
+    case 39: // flèche droite
+    if (indexTireur % 20 !== 19) { // vérifie que le tireur ne se trouve pas sur la bordure droite
+    tireur.classList.remove("tireur"); // enlève la classe "tireur" de l'élément actuel
+    tableauGrille[indexTireur + 1].classList.add("tireur"); // ajoute la classe "tireur" à l'élément suivant
+    }
+    break;
+    case 40: // flèche bas
+    if (indexTireur <= 219) { // vérifie que le tireur ne se trouve pas sur la bordure inférieure
+    tireur.classList.remove("tireur"); // enlève la classe "tireur" de l'élément actuel
+    tableauGrille[indexTireur + 20].classList.add("tireur"); // ajoute la classe "tireur" à l'élément 20 cases en dessous
+    }
+    break;
+}
+};
