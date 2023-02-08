@@ -1,3 +1,6 @@
+body{
+    background: url(ressources/LNH6.gif)
+}
 
 .grille {
     display: flex;
@@ -7,7 +10,7 @@
     height: 500px;
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    background: url(ressources/background-black.png);
+    background: url(ressources/background-space-invaders.gif);
     animation: background-defile 5s linear infinite;
 }
 
@@ -21,6 +24,7 @@
 }
 
 h3 {
+    color: white;
     text-align: center;
     margin: 20px 0;
 }
