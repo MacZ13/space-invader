@@ -138,21 +138,35 @@ function moveAlien() {
 
 invadersId = setInterval(moveAlien, 700);
     
-function tir(event) {
-    let laserId
-    toutesLesDivs[tireurIndex - 20].classList.add('laser');
+document.addEventListener('keydown', function(event) {
+    switch (event.keyCode) {
+        case 32: // Touche espace
+            toutesLesDivs[tireurIndex].classList.add('laser');
+            laserId = setInterval(moveLaser, 100);
+            break;
     }
-    document.addEventListener('keydown', tir);
+});
 
-    ////////
+//-------------------------------------------------//
 
+function moveLaser() {
+    for (let i = 0; i < toutesLesDivs.length; i++) {
+        if (toutesLesDivs[i].classList.contains('laser')) { 
+            for (let j = 0; j < alienInvaders.length; j++) {
+                if (alienInvaders[j].offsetLeft === toutesLesDivs[i].offsetLeft &&
+                    alienInvaders[j].offsetTop === toutesLesDivs[i].offsetTop) {
+                    // Supprimez l'invader
+                    alienInvaders[j].parentNode.removeChild(alienInvaders[j]);
+                    alienInvaders.splice(j, 1);
+                    break;
+                }
+            }
 
-    invadersId = setInterval(moveLaser, 100);
-    function moveLaser() {
-        for (let i = 0; i < toutesLesDivs.length; i++) {
-            if (toutesLesDivs[i].contains('laser'));
-
-
+            toutesLesDivs[i].classList.remove('laser');
+            if (i > 0) {
+                toutesLesDivs[i - 20].classList.add('laser');
+            }
+            break;
         }
     }
-
+}
