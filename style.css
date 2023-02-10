@@ -1,13 +1,16 @@
+body{
+    background: url(ressources/LNH6.gif)
+}
 
 .grille {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #000;
+    border: 1px solid rgb(255, 255, 255);
     width: 500px;
     height: 500px;
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    background: url(ressources/background-black.png);
+    background: url(ressources/LNH6.gif);
     animation: background-defile 5s linear infinite;
 }
 
@@ -21,8 +24,23 @@
 }
 
 h3 {
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
     text-align: center;
     margin: 20px 0;
+}
+
+.bouton {
+	background-color: #4c1259;
+	border-radius: 42px;
+	border: 3px solid #200729;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 16px 31px;
+	text-decoration: none;
 }
 .grille div {
     width: 25px;
@@ -40,9 +58,12 @@ h3 {
     background-size: contain;
 }
 .boom {
-    background-color: red;
+    background: url(ressources/explosion.png);
+    background-size: cover;
 }
 .laser {
-    background-color: orange;
+    background: url(ressources/lazer.png);
+    background-size: cover;
+
 }
 
