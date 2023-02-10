@@ -3,9 +3,16 @@
 const spaceInvader = document.querySelector('.grille')
 var resultsDisplay = document.querySelector('h3')
 const btnReset = document.getElementById("bouton_reset")
+
+const btnEasy = document.getElementById("bouton_facile");
+const btnMoyen = document.getElementById("bouton_moyen");
+const btnHard = document.getElementById("bouton_difficile");
+
 let results = 0
 let tireurIndex = 230
 let laserEncours = 230
+var vitesseAlien = 600;
+
 
 let direction = 1
 let width = 20
@@ -17,6 +24,9 @@ let aliensRemoved = []
 btnReset.onclick = function () {
     window.location.reload();
 }
+
+
+
 
 for (let i = 1; i < 241; i++){
     const maDiv = document.createElement('div');
@@ -129,24 +139,37 @@ function moveAlien() {
 
     draw()
 
-/*   if (toutesLesDivs[tireurIndex].classList.contains('alien', 'tireur')) {
-    results.innerHTML = 'TES NUL'
-    clearInterval(invadersId)
-  } 
-
-  for (let i = 0; i < alienInvaders.length; i++) {
-    if(alienInvaders[tireurIndex] > (toutesLesDivs.length)) {
-      results.innerHTML = 'TES NUL'
-      clearInterval(invadersId)
+for (let i = 0; i < alienInvaders.length; i++) {
+        if (alienInvaders[i] === tireurIndex) {
+            alert("Vous avez perdu!");
+            clearInterval(invadersId)
+        }
     }
-  }
-  if (aliensRemoved.length === alienInvaders.length) {
-    results.innerHTML = 'YOU WIN'
-    clearInterval(invadersId)
-  }  */
 }
 
-invadersId = setInterval(moveAlien, 600);
+
+btnEasy.onclick = function () {
+    invadersId = setInterval(moveAlien, 600);
+    btnMoyen.style.display = "none";
+    btnEasy.style.display = "none";
+
+    btnHard.style.display = "none";
+}
+btnMoyen.onclick = function () {``
+    invadersId = setInterval(moveAlien, 400);
+    btnEasy.style.display = "none";
+    btnHard.style.display = "none";
+    btnMoyen.style.display = "none";
+
+}
+btnHard.onclick = function () {
+    invadersId = setInterval(moveAlien, 200);
+    btnEasy.style.display = "none";
+    btnMoyen.style.display = "none";
+    btnHard.style.display = "none";
+
+}
+
     
 document.addEventListener('keyup', function(event) {
     switch (event.keyCode) {

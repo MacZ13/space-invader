@@ -58,8 +58,11 @@ h3 {
     background-size: contain;
 }
 .boom {
-    background-color: red;
+    background: url(ressources/explosion.png);
+    background-size: cover;
 }
 .laser {
-    background-color: orange;
+    background: url(ressources/lazer.png);
+    background-size: cover;
+
 }
