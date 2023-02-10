@@ -2,6 +2,8 @@
 
 const spaceInvader = document.querySelector('.grille')
 let tireurIndex = 230
+let laserEncours = 230
+
 let direction = 1
 let width = 20
 let invadersId
@@ -18,7 +20,7 @@ const toutesLesDivs = document.querySelectorAll('.grille div');
 
 /* Afficher les vaisseau */
 
-const alienInvaders = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+var alienInvaders = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51];
 
 function draw() {
     for (let i = 0; i < alienInvaders.length; i++) {
@@ -119,21 +121,21 @@ function moveAlien() {
 
     draw()
 
-  if (toutesLesDivs[tireurIndex].classList.contains('alien', 'tireur')) {
-    results.innerHTML = 'BOOHHHH'
+/*   if (toutesLesDivs[tireurIndex].classList.contains('alien', 'tireur')) {
+    results.innerHTML = 'TES NUL'
     clearInterval(invadersId)
-  }
+  } 
 
   for (let i = 0; i < alienInvaders.length; i++) {
-    if(alienInvaders[i] > (toutesLesDivs.length)) {
-      results.innerHTML = 'AAHHHHH'
+    if(alienInvaders[tireurIndex] > (toutesLesDivs.length)) {
+      results.innerHTML = 'TES NUL'
       clearInterval(invadersId)
     }
   }
   if (aliensRemoved.length === alienInvaders.length) {
     results.innerHTML = 'YOU WIN'
     clearInterval(invadersId)
-  }
+  }  */
 }
 
 invadersId = setInterval(moveAlien, 700);
@@ -141,32 +143,35 @@ invadersId = setInterval(moveAlien, 700);
 document.addEventListener('keydown', function(event) {
     switch (event.keyCode) {
         case 32: // Touche espace
-            toutesLesDivs[tireurIndex].classList.add('laser');
-            laserId = setInterval(moveLaser, 100);
+            toutesLesDivs[tireurIndex -20].classList.add('laser')
             break;
     }
 });
+laserId = setInterval(moveLaser, 100);
 
 //-------------------------------------------------//
 
 function moveLaser() {
+
     for (let i = 0; i < toutesLesDivs.length; i++) {
-        if (toutesLesDivs[i].classList.contains('laser')) { 
-            for (let j = 0; j < alienInvaders.length; j++) {
-                if (alienInvaders[j].offsetLeft === toutesLesDivs[i].offsetLeft &&
-                    alienInvaders[j].offsetTop === toutesLesDivs[i].offsetTop) {
-                    // Supprimez l'invader
-                    alienInvaders[j].parentNode.removeChild(alienInvaders[j]);
-                    alienInvaders.splice(j, 1);
-                    break;
-                }
-            }
+        if (toutesLesDivs[i].classList.contains('laser')) {
+             laserEncours = i - 20;
 
             toutesLesDivs[i].classList.remove('laser');
-            if (i > 0) {
-                toutesLesDivs[i - 20].classList.add('laser');
+            if (laserEncours > 0) {
+                toutesLesDivs[laserEncours].classList.add('laser')
+    
+
+                if (toutesLesDivs[laserEncours].classList.contains('alien')) {
+                    toutesLesDivs[laserEncours].classList.remove('laser');
+                    toutesLesDivs[laserEncours].classList.remove('alien');
+                    toutesLesDivs[laserEncours].classList.add('boom');
+                    alienInvaders = alienInvaders.filter(el => el !== laserEncours);  
+                }
             }
-            break;
         }
+        if (toutesLesDivs[i].classList.contains('boom'))
+        toutesLesDivs[i].classList.remove('boom');  
     }
+    
 }
